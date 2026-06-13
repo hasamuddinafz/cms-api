@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/NexusCms.Api/NexusCms.Api.csproj" />
+    <Project Path="src/NexusCms.Application/NexusCms.Application.csproj" />
+    <Project Path="src/NexusCms.Domain/NexusCms.Domain.csproj" />
+    <Project Path="src/NexusCms.Persistence/NexusCms.Persistence.csproj" />
+  </Folder>
+</Solution>
