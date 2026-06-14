@@ -35,10 +35,11 @@ public class MenusController(IMediator mediator) : ControllerBase
     [RequirePermission(Permissions.Menus.Manage)]
     public async Task<IActionResult> Upsert(string key, [FromBody] UpsertMenuBody body, CancellationToken ct)
     {
-        var command = new UpsertMenuCommand(key, body.Type, body.ItemsJson);
+        var menuType = key.StartsWith("footer") ? NexusCms.Domain.Enums.MenuType.Footer : NexusCms.Domain.Enums.MenuType.Header;
+        var command = new UpsertMenuCommand(key, menuType, body.ItemsJson);
         var result  = await mediator.Send(command, ct);
         return result.IsSuccess ? Ok(new { id = result.Value }) : BadRequest(new { error = result.Error });
     }
 }
 
-public record UpsertMenuBody(NexusCms.Domain.Enums.MenuType Type, string ItemsJson);
+public record UpsertMenuBody(string ItemsJson);
