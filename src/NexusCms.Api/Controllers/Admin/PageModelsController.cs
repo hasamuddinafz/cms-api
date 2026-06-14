@@ -54,8 +54,7 @@ public class PageModelsController(IMediator mediator) : ControllerBase
     [RequirePermission(Permissions.PageModels.Edit)]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdatePageModelCommand command, CancellationToken ct)
     {
-        if (id != command.Id) return BadRequest(new { error = "URL id ile body id eşleşmiyor." });
-        var result = await mediator.Send(command, ct);
+        var result = await mediator.Send(command with { Id = id }, ct);
         return result.IsSuccess ? NoContent() : NotFound(new { error = result.Error });
     }
 
