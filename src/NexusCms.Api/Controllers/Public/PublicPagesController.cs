@@ -15,12 +15,11 @@ public class PublicPagesController(IMediator mediator) : ControllerBase
     [OutputCache(PolicyName = "Public5min")]
     public async Task<IActionResult> GetList(
         string modelKey,
-        [FromQuery] string lang     = "tr",
-        [FromQuery] int    page     = 1,
-        [FromQuery] int    pageSize = 10,
+        [FromQuery] int page     = 1,
+        [FromQuery] int pageSize = 10,
         CancellationToken ct = default)
     {
-        var result = await mediator.Send(new GetPublicPageListQuery(modelKey, lang, page, pageSize), ct);
+        var result = await mediator.Send(new GetPublicPageListQuery(modelKey, page, pageSize), ct);
         return result.IsSuccess ? Ok(result.Value) : NotFound(result.Error);
     }
 
@@ -30,10 +29,9 @@ public class PublicPagesController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> GetBySlug(
         string modelKey,
         string slug,
-        [FromQuery] string lang = "tr",
         CancellationToken ct = default)
     {
-        var result = await mediator.Send(new GetPublicPageQuery(modelKey, slug, lang), ct);
+        var result = await mediator.Send(new GetPublicPageQuery(modelKey, slug), ct);
         return result.IsSuccess ? Ok(result.Value) : NotFound(result.Error);
     }
 }
