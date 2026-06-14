@@ -11,6 +11,7 @@ public class GetRoleByIdQueryHandler(IDbContextAccessor db)
     public async Task<Result<RoleDto>> Handle(GetRoleByIdQuery request, CancellationToken ct)
     {
         var role = await db.Roles
+            .AsNoTracking()
             .Include(r => r.RolePermissions)
                 .ThenInclude(rp => rp.Permission)
             .FirstOrDefaultAsync(r => r.Id == request.Id, ct);

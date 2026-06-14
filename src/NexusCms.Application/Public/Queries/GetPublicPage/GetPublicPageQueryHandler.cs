@@ -12,6 +12,7 @@ public class GetPublicPageQueryHandler(IDbContextAccessor db)
     public async Task<Result<PublicPageDto>> Handle(GetPublicPageQuery request, CancellationToken ct)
     {
         var page = await db.PageInstances
+            .AsNoTracking()
             .Where(p => p.PageModel.Key == request.ModelKey
                      && p.Slug         == request.Slug
                      && p.Status       == PageStatus.Published)

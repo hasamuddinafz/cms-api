@@ -9,6 +9,7 @@ public class GetMenuListQueryHandler(IDbContextAccessor db)
 {
     public async Task<IReadOnlyList<MenuDto>> Handle(GetMenuListQuery request, CancellationToken ct)
         => await db.Menus
+            .AsNoTracking()
             .OrderBy(m => m.Key)
             .Select(m => new MenuDto(m.Id, m.Key, m.Type, m.ItemsJson, m.CreatedAt, m.UpdatedAt))
             .ToListAsync(ct);

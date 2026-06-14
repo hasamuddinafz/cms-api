@@ -12,6 +12,7 @@ public class GetTopPagesQueryHandler(IDbContextAccessor db)
     public async Task<Result<List<TopPageDto>>> Handle(GetTopPagesQuery request, CancellationToken ct)
     {
         var pages = await db.PageInstances
+            .AsNoTracking()
             .Where(p => p.Status == PageStatus.Published)
             .OrderByDescending(p => p.ViewCount)
             .Take(request.Take)

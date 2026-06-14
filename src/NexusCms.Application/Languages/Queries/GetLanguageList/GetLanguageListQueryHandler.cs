@@ -10,7 +10,7 @@ public class GetLanguageListQueryHandler(IDbContextAccessor db)
 {
     public async Task<Result<List<LanguageDto>>> Handle(GetLanguageListQuery request, CancellationToken cancellationToken)
     {
-        var query = db.Languages.AsQueryable();
+        var query = db.Languages.AsNoTracking().AsQueryable();
 
         if (request.ActiveOnly)
             query = query.Where(l => l.IsActive);

@@ -21,6 +21,9 @@ public class RefreshTokenCommandHandler(
         if (stored is null || !stored.IsActive)
             return Result.Failure<LoginResponse>("Geçersiz veya süresi dolmuş yenileme tokeni.");
 
+        if (stored.ExpiresAt <= DateTime.UtcNow)
+            return Result.Failure<LoginResponse>("Oturum süresi dolmuş. Lütfen tekrar giriş yapın.");
+
         if (!stored.User.IsActive)
             return Result.Failure<LoginResponse>("Kullanıcı hesabı devre dışı.");
 

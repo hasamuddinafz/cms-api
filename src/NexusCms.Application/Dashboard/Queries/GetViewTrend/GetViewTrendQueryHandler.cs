@@ -13,6 +13,7 @@ public class GetViewTrendQueryHandler(IDbContextAccessor db)
         var since = DateTime.UtcNow.Date.AddDays(-request.Days + 1);
 
         var raw = await db.PageViewLogs
+            .AsNoTracking()
             .Where(l => l.ViewedAt >= since)
             .GroupBy(l => l.ViewedAt.Date)
             .Select(g => new { Date = g.Key, Views = (long)g.Count() })

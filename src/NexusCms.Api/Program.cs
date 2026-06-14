@@ -46,14 +46,20 @@ try
         await DatabaseSeeder.SeedAsync(db, userManager, roleManager);
     }
 
+    app.UseSwagger();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NEXUS CMS API v1"));
+
     app.UseSerilogRequestLogging();
     app.UseMiddleware<NexusCms.Api.Middleware.ExceptionMiddleware>();
     app.UseStaticFiles();   // serves /uploads/* from wwwroot
     app.UseHttpsRedirection();
+    app.UseCors("Panel");
     app.UseAuthentication();
     app.UseAuthorization();
     app.UseOutputCache();
+    app.UseRateLimiter();
     app.MapControllers();
+    app.MapHealthChecks("/health");
 
     app.Run();
 }

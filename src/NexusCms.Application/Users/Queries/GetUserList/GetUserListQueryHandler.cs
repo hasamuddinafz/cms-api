@@ -11,7 +11,7 @@ public class GetUserListQueryHandler(IDbContextAccessor db)
 {
     public async Task<Result<PagedResult<UserListItemDto>>> Handle(GetUserListQuery request, CancellationToken ct)
     {
-        var query = db.Users.AsQueryable();
+        var query = db.Users.AsNoTracking().AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(request.Search))
             query = query.Where(u =>

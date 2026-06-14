@@ -11,6 +11,7 @@ public class GetRecentActivityQueryHandler(IDbContextAccessor db)
     public async Task<Result<List<RecentActivityDto>>> Handle(GetRecentActivityQuery request, CancellationToken ct)
     {
         var logs = await db.AuditLogs
+            .AsNoTracking()
             .OrderByDescending(l => l.CreatedAt)
             .Take(request.Take)
             .GroupJoin(

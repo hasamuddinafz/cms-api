@@ -11,6 +11,7 @@ public class GetPublicMenuQueryHandler(IDbContextAccessor db)
     public async Task<Result<PublicMenuDto>> Handle(GetPublicMenuQuery request, CancellationToken ct)
     {
         var menu = await db.Menus
+            .AsNoTracking()
             .Where(m => m.Key == request.Key)
             .Select(m => new PublicMenuDto(m.Key, m.ItemsJson))
             .FirstOrDefaultAsync(ct);

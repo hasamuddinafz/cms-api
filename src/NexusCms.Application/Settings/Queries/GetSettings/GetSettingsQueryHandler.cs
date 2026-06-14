@@ -10,7 +10,7 @@ public class GetSettingsQueryHandler(IDbContextAccessor db) : IRequestHandler<Ge
 {
     public async Task<Result<AppSettingDto>> Handle(GetSettingsQuery request, CancellationToken cancellationToken)
     {
-        var setting = await db.AppSettings.FirstOrDefaultAsync(cancellationToken);
+        var setting = await db.AppSettings.AsNoTracking().FirstOrDefaultAsync(cancellationToken);
 
         if (setting is null)
         {

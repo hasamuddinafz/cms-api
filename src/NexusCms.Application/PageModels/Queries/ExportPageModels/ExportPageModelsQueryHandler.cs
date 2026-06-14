@@ -9,7 +9,7 @@ public class ExportPageModelsQueryHandler(IDbContextAccessor db, IExportService 
 {
     public async Task<ExportResult> Handle(ExportPageModelsQuery request, CancellationToken ct)
     {
-        var q = db.PageModels.AsQueryable();
+        var q = db.PageModels.AsNoTracking().AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(request.Request.Search))
         {

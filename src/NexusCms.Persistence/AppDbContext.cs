@@ -23,6 +23,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
     public DbSet<PageViewLog> PageViewLogs => Set<PageViewLog>();
+    public DbSet<ContactMessage> ContactMessages => Set<ContactMessage>();
+    public DbSet<Subscriber> Subscribers => Set<Subscriber>();
+    public DbSet<MailTemplate> MailTemplates => Set<MailTemplate>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

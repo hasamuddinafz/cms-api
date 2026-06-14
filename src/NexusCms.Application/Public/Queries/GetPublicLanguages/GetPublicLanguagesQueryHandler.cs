@@ -11,6 +11,7 @@ public class GetPublicLanguagesQueryHandler(IDbContextAccessor db)
     public async Task<Result<List<PublicLanguageDto>>> Handle(GetPublicLanguagesQuery request, CancellationToken ct)
     {
         var languages = await db.Languages
+            .AsNoTracking()
             .Where(l => l.IsActive)
             .OrderBy(l => l.SortOrder)
             .ThenBy(l => l.Name)

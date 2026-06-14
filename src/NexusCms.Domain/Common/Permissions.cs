@@ -66,6 +66,33 @@ public static class Permissions
         public const string View = "activity.view";
     }
 
+    public static class Contact
+    {
+        public const string View   = "contact.view";
+        public const string Delete = "contact.delete";
+        public const string Reply  = "contact.reply";
+    }
+
+    public static class Subscribers
+    {
+        public const string View   = "subscribers.view";
+        public const string Delete = "subscribers.delete";
+        public const string Export = "subscribers.export";
+    }
+
+    public static class Mail
+    {
+        public const string Send = "mail.send";
+    }
+
+    public static class MailTemplates
+    {
+        public const string View   = "mailtemplates.view";
+        public const string Create = "mailtemplates.create";
+        public const string Edit   = "mailtemplates.edit";
+        public const string Delete = "mailtemplates.delete";
+    }
+
     /// <summary>
     /// Returns all permission records for seeding. Preserves deterministic GUIDs
     /// so re-running seed is idempotent.
@@ -112,5 +139,24 @@ public static class Permissions
 
         // Activity
         (new Guid("10000009-0000-0000-0000-000000000001"), Activity.View, "Activity", "Aktivite Geçmişini Görüntüle"),
+
+        // Contact
+        (new Guid("10000010-0000-0000-0000-000000000001"), Contact.View,   "Contact", "İletişim Mesajlarını Görüntüle"),
+        (new Guid("10000010-0000-0000-0000-000000000002"), Contact.Delete, "Contact", "İletişim Mesajı Sil"),
+        (new Guid("10000010-0000-0000-0000-000000000003"), Contact.Reply,  "Contact", "İletişim Mesajına Cevap Ver"),
+
+        // Subscribers
+        (new Guid("10000011-0000-0000-0000-000000000001"), Subscribers.View,   "Subscribers", "Aboneleri Görüntüle"),
+        (new Guid("10000011-0000-0000-0000-000000000002"), Subscribers.Delete, "Subscribers", "Abone Sil"),
+        (new Guid("10000011-0000-0000-0000-000000000003"), Subscribers.Export, "Subscribers", "Aboneleri Dışa Aktar"),
+
+        // Mail
+        (new Guid("10000012-0000-0000-0000-000000000001"), Mail.Send, "Mail", "Mail Gönder"),
+
+        // MailTemplates
+        (new Guid("10000013-0000-0000-0000-000000000001"), MailTemplates.View,   "MailTemplates", "Mail Şablonlarını Görüntüle"),
+        (new Guid("10000013-0000-0000-0000-000000000002"), MailTemplates.Create, "MailTemplates", "Mail Şablonu Oluştur"),
+        (new Guid("10000013-0000-0000-0000-000000000003"), MailTemplates.Edit,   "MailTemplates", "Mail Şablonu Düzenle"),
+        (new Guid("10000013-0000-0000-0000-000000000004"), MailTemplates.Delete, "MailTemplates", "Mail Şablonu Sil"),
     ];
 }

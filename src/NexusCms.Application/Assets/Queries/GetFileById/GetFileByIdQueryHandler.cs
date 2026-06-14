@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NexusCms.Application.Common.Interfaces;
 using NexusCms.Domain.Common;
 
@@ -9,7 +10,7 @@ public class GetFileByIdQueryHandler(IDbContextAccessor db)
 {
     public async Task<Result<FileAssetDto>> Handle(GetFileByIdQuery request, CancellationToken ct)
     {
-        var a = await db.FileAssets.FindAsync([request.Id], ct);
+        var a = await db.FileAssets.AsNoTracking().FirstOrDefaultAsync(f => f.Id == request.Id, ct);
         return a is not null
             ? Result.Success(new FileAssetDto(
                 a.Id, a.FileName, a.OriginalFileName, a.MimeType,

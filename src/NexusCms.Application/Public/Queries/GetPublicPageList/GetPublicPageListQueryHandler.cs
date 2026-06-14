@@ -13,6 +13,7 @@ public class GetPublicPageListQueryHandler(IDbContextAccessor db)
     public async Task<Result<PagedResult<PublicPageListItemDto>>> Handle(GetPublicPageListQuery request, CancellationToken ct)
     {
         var query = db.PageInstances
+            .AsNoTracking()
             .Where(p => p.PageModel.Key == request.ModelKey
                      && p.Status        == PageStatus.Published)
             .OrderByDescending(p => p.PublishedAt);

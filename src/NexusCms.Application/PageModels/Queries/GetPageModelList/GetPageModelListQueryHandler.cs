@@ -10,7 +10,7 @@ public class GetPageModelListQueryHandler(IDbContextAccessor db)
 {
     public async Task<PagedResult<PageModelDto>> Handle(GetPageModelListQuery request, CancellationToken ct)
     {
-        var q = db.PageModels.AsQueryable();
+        var q = db.PageModels.AsNoTracking().AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(request.Request.Search))
         {

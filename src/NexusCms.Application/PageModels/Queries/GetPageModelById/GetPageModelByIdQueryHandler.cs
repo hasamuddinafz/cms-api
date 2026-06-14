@@ -11,6 +11,7 @@ public class GetPageModelByIdQueryHandler(IDbContextAccessor db)
     public async Task<Result<PageModelDto>> Handle(GetPageModelByIdQuery request, CancellationToken ct)
     {
         var dto = await db.PageModels
+            .AsNoTracking()
             .Where(m => m.Id == request.Id)
             .Select(m => new PageModelDto(
                 m.Id, m.Key, m.Name, m.Description, m.Icon, m.IsSingleton, m.SchemaJson,

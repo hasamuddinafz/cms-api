@@ -11,6 +11,7 @@ public class GetAllPermissionsQueryHandler(IDbContextAccessor db)
     public async Task<Result<List<PermissionGroupDto>>> Handle(GetAllPermissionsQuery request, CancellationToken ct)
     {
         var permissions = await db.Permissions
+            .AsNoTracking()
             .OrderBy(p => p.Module).ThenBy(p => p.Key)
             .ToListAsync(ct);
 

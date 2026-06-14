@@ -10,7 +10,7 @@ public class GetPublicSettingsQueryHandler(IDbContextAccessor db)
 {
     public async Task<Result<PublicSettingsDto>> Handle(GetPublicSettingsQuery request, CancellationToken ct)
     {
-        var setting = await db.AppSettings.FirstOrDefaultAsync(ct);
+        var setting = await db.AppSettings.AsNoTracking().FirstOrDefaultAsync(ct);
 
         // Return sensible empty defaults if singleton hasn't been saved yet
         return Result<PublicSettingsDto>.Success(new PublicSettingsDto(

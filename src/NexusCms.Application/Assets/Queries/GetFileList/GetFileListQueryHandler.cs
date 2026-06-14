@@ -11,7 +11,7 @@ public class GetFileListQueryHandler(IDbContextAccessor db)
 {
     public async Task<PagedResult<FileAssetDto>> Handle(GetFileListQuery request, CancellationToken ct)
     {
-        var q = db.FileAssets.AsQueryable();
+        var q = db.FileAssets.AsNoTracking().AsQueryable();
 
         // fileType filter
         if (request.Request.Filters.TryGetValue("fileType", out var ftStr)

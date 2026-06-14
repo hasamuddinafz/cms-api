@@ -11,7 +11,7 @@ public class ExportFilesQueryHandler(IDbContextAccessor db, IExportService expor
 {
     public async Task<ExportResult> Handle(ExportFilesQuery request, CancellationToken ct)
     {
-        var q = db.FileAssets.AsQueryable();
+        var q = db.FileAssets.AsNoTracking().AsQueryable();
 
         if (request.Request.Filters.TryGetValue("fileType", out var ftStr)
             && Enum.TryParse<FileType>(ftStr, true, out var ft))

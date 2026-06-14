@@ -11,7 +11,7 @@ public class GetPageInstanceListQueryHandler(IDbContextAccessor db)
 {
     public async Task<PagedResult<PageInstanceListItemDto>> Handle(GetPageInstanceListQuery request, CancellationToken ct)
     {
-        var q = db.PageInstances.AsQueryable();
+        var q = db.PageInstances.AsNoTracking().AsQueryable();
 
         // Optional: filter to a single model
         if (request.PageModelId.HasValue)

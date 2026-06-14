@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NexusCms.Api.Authorization;
 using NexusCms.Application.Users.Commands.AssignRoles;
+using NexusCms.Application.Users.Commands.CreateUser;
 using NexusCms.Application.Users.Queries.GetUserList;
 using NexusCms.Domain.Common;
 
@@ -21,6 +22,14 @@ public class UsersController(IMediator mediator) : ControllerBase
     {
         var r = await mediator.Send(new GetUserListQuery(search, page, pageSize), ct);
         return r.IsSuccess ? Ok(r.Value) : BadRequest(r.Error);
+    }
+
+    [HttpPost]
+    [RequirePermission(Permissions.Users.Manage)]
+    public async Task<IActionResult> Create([FromBody] CreateUserCommand command, CancellationToken ct)
+    {
+        var r = await mediator.Send(command, ct);
+        return r.IsSuccess ? Ok(new { id = r.Value }) : BadRequest(new { error = r.Error });
     }
 
     [HttpPut("{id:guid}/roles")]

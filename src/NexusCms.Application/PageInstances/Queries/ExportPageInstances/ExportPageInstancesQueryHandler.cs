@@ -11,7 +11,7 @@ public class ExportPageInstancesQueryHandler(IDbContextAccessor db, IExportServi
 {
     public async Task<ExportResult> Handle(ExportPageInstancesQuery request, CancellationToken ct)
     {
-        var q = db.PageInstances.AsQueryable();
+        var q = db.PageInstances.AsNoTracking().AsQueryable();
 
         if (request.PageModelId.HasValue)
             q = q.Where(i => i.PageModelId == request.PageModelId.Value);

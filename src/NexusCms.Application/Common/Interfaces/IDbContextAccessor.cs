@@ -23,6 +23,9 @@ public interface IDbContextAccessor
     DbSet<AuditLog> AuditLogs { get; }
     DbSet<ApplicationUser> Users { get; }
     DbSet<PageViewLog> PageViewLogs { get; }
+    DbSet<ContactMessage> ContactMessages { get; }
+    DbSet<Subscriber> Subscribers { get; }
+    DbSet<MailTemplate> MailTemplates { get; }
 
     Task<int> SaveChangesAsync(CancellationToken ct = default);
 

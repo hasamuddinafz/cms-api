@@ -19,6 +19,9 @@ public class DbContextAccessor(AppDbContext context) : IDbContextAccessor
     public DbSet<AppSetting>   AppSettings       => context.AppSettings;
     public DbSet<AuditLog>        AuditLogs       => context.AuditLogs;
     public DbSet<PageViewLog>     PageViewLogs    => context.PageViewLogs;
+    public DbSet<ContactMessage>  ContactMessages => context.ContactMessages;
+    public DbSet<Subscriber>      Subscribers     => context.Subscribers;
+    public DbSet<MailTemplate>    MailTemplates   => context.MailTemplates;
     public DbSet<ApplicationUser> Users           => context.Users;
 
     public Task<int> SaveChangesAsync(CancellationToken ct = default)

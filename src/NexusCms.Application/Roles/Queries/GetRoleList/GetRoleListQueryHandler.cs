@@ -11,7 +11,7 @@ public class GetRoleListQueryHandler(IDbContextAccessor db)
 {
     public async Task<Result<PagedResult<RoleListItemDto>>> Handle(GetRoleListQuery request, CancellationToken ct)
     {
-        var query = db.Roles.AsQueryable();
+        var query = db.Roles.AsNoTracking().AsQueryable();
         if (!string.IsNullOrWhiteSpace(request.Search))
             query = query.Where(r => r.Name!.Contains(request.Search));
 
