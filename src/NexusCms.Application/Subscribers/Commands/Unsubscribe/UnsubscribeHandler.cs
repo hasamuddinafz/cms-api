@@ -11,7 +11,7 @@ public class UnsubscribeHandler(IDbContextAccessor db) : IRequestHandler<Unsubsc
     public async Task<Result> Handle(UnsubscribeCommand request, CancellationToken ct)
     {
         var sub = await db.Subscribers.FirstOrDefaultAsync(x => x.Email == request.Email, ct);
-        if (sub is null) return Result.Failure("Abone bulunamadı.");
+        if (sub is null) return Result.Failure("Subscriber not found.");
         sub.IsActive = false;
         sub.UnsubscribedAt = DateTime.UtcNow;
         await db.SaveChangesAsync(ct);

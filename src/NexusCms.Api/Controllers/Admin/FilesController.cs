@@ -26,7 +26,7 @@ public class FilesController(IMediator mediator) : ControllerBase
         CancellationToken ct)
     {
         if (file is null || file.Length == 0)
-            return BadRequest(new { error = "Dosya seçilmedi." });
+            return BadRequest(new { error = "No file selected." });
 
         await using var stream = file.OpenReadStream();
         var command = new UploadFileCommand(

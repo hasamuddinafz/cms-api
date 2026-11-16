@@ -13,20 +13,20 @@ public class CreatePageInstanceCommandHandler(IDbContextAccessor db, ICurrentUse
     {
         var model = await db.PageModels.FindAsync([request.PageModelId], ct);
         if (model is null)
-            return Result.Failure<Guid>("Sayfa modeli bulunamadı.");
+            return Result.Failure<Guid>("Page model not found.");
 
         // Singleton check: only one instance allowed
         if (model.IsSingleton)
         {
             var exists = await db.PageInstances.AnyAsync(i => i.PageModelId == request.PageModelId, ct);
             if (exists)
-                return Result.Failure<Guid>($"'{model.Name}' modeli tekil (singleton) olduğundan yalnızca bir içerik oluşturulabilir.");
+                return Result.Failure<Guid>($"'{model.Name}' is a singleton model, so only one content item can be created.");
         }
 
         var slugTaken = await db.PageInstances
             .AnyAsync(i => i.PageModelId == request.PageModelId && i.Slug == request.Slug, ct);
         if (slugTaken)
-            return Result.Failure<Guid>("Bu model için aynı slug zaten kullanımda.");
+            return Result.Failure<Guid>("This slug is already in use for this model.");
 
         var instance = new PageInstance
         {

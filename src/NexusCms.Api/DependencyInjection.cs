@@ -105,7 +105,7 @@ public static class DependencyInjection
                     .WithOrigins(allowedOrigins)
                     .AllowAnyHeader()
                     .AllowAnyMethod()
-                    .AllowCredentials(); // refresh token httpOnly cookie için gerekli
+                    .AllowCredentials(); // required for the refresh token httpOnly cookie
             });
         });
 

@@ -12,7 +12,7 @@ public class CreateUserCommandHandler(UserManager<ApplicationUser> userManager)
     {
         var exists = await userManager.FindByEmailAsync(request.Email);
         if (exists is not null)
-            return Result.Failure<Guid>("Bu e-posta adresi zaten kullanılıyor.");
+            return Result.Failure<Guid>("This email address is already in use.");
 
         var user = new ApplicationUser
         {

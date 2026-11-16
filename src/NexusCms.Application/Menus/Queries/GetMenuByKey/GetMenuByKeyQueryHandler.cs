@@ -18,6 +18,6 @@ public class GetMenuByKeyQueryHandler(IDbContextAccessor db)
 
         return dto is not null
             ? Result.Success(dto)
-            : Result.Failure<MenuDto>($"'{request.Key}' anahtarlı menü bulunamadı.");
+            : Result.Failure<MenuDto>($"Menu with key '{request.Key}' not found.");
     }
 }

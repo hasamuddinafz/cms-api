@@ -17,7 +17,7 @@ public class GetRoleByIdQueryHandler(IDbContextAccessor db)
             .FirstOrDefaultAsync(r => r.Id == request.Id, ct);
 
         if (role is null)
-            return Result<RoleDto>.Failure("Rol bulunamadı.");
+            return Result<RoleDto>.Failure("Role not found.");
 
         return Result<RoleDto>.Success(new RoleDto(
             role.Id,

@@ -16,8 +16,8 @@ public class PageInstance : AuditableEntity
     public string Slug { get; set; } = string.Empty;
     public PageStatus Status { get; set; } = PageStatus.Draft;
 
-    public string ContentJson { get; set; } = "{}";        // JSONB — { "tr": { "hero": {...} }, "en": {...} }
-    public string SeoMetaJson { get; set; } = "{}";        // JSONB — { "tr": { "title": "...", ... } }
+    public string ContentJson { get; set; } = "{}";        // JSONB — { "en": { "hero": {...} }, "de": {...} }
+    public string SeoMetaJson { get; set; } = "{}";        // JSONB — { "en": { "title": "...", ... } }
 
     public long ViewCount { get; set; }
     public DateTime? PublishedAt { get; set; }

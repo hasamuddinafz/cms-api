@@ -10,7 +10,7 @@ public class UpsertMenuCommandValidator : AbstractValidator<UpsertMenuCommand>
             .NotEmpty()
             .MaximumLength(100)
             .Matches("^[a-z0-9-]+$")
-            .WithMessage("Key yalnızca küçük harf, rakam ve tire içerebilir.");
+            .WithMessage("Key may only contain lowercase letters, digits and hyphens.");
 
         RuleFor(x => x.ItemsJson)
             .NotEmpty()
@@ -19,6 +19,6 @@ public class UpsertMenuCommandValidator : AbstractValidator<UpsertMenuCommand>
                 try { System.Text.Json.JsonDocument.Parse(json); return true; }
                 catch { return false; }
             })
-            .WithMessage("ItemsJson geçerli bir JSON dizisi olmalıdır.");
+            .WithMessage("ItemsJson must be a valid JSON array.");
     }
 }

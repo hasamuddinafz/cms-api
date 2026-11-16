@@ -21,7 +21,7 @@ public class PublicContactController(IMediator mediator, AppDbContext db) : Cont
         var r = await mediator.Send(new SubmitContactMessageCommand(
             body.FullName, body.Email, body.Phone, body.Subject, body.Message, ip, ua), ct);
         return r.IsSuccess
-            ? Ok(new { message = "Mesajınız alındı." })
+            ? Ok(new { message = "Your message has been received." })
             : BadRequest(new { error = r.Error });
     }
 
@@ -29,12 +29,12 @@ public class PublicContactController(IMediator mediator, AppDbContext db) : Cont
     public async Task<IActionResult> Subscribe([FromBody] SubscribeRequest body, CancellationToken ct)
     {
         if (!await IsSubscriptionEnabledAsync(ct))
-            return StatusCode(503, new { error = "Abonelik sistemi şu anda aktif değil." });
+            return StatusCode(503, new { error = "The subscription system is currently disabled." });
 
         var ip = HttpContext.Connection.RemoteIpAddress?.ToString();
         var r = await mediator.Send(new SubscribeCommand(body.Email, body.FullName, ip), ct);
         return r.IsSuccess
-            ? Ok(new { message = "Aboneliğiniz oluşturuldu." })
+            ? Ok(new { message = "Your subscription has been created." })
             : BadRequest(new { error = r.Error });
     }
 
@@ -43,7 +43,7 @@ public class PublicContactController(IMediator mediator, AppDbContext db) : Cont
     {
         var r = await mediator.Send(new UnsubscribeCommand(body.Email), ct);
         return r.IsSuccess
-            ? Ok(new { message = "Aboneliğiniz iptal edildi." })
+            ? Ok(new { message = "Your subscription has been cancelled." })
             : BadRequest(new { error = r.Error });
     }
 

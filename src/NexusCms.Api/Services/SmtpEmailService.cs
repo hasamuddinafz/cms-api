@@ -19,7 +19,7 @@ public class SmtpEmailService(AppDbContext db, IEncryptionService encryption, IL
         var smtp = JsonSerializer.Deserialize<SmtpConfig>(setting.SmtpJson) ?? new SmtpConfig();
 
         if (string.IsNullOrWhiteSpace(smtp.Host))
-            throw new InvalidOperationException("SMTP ayarları yapılandırılmamış.");
+            throw new InvalidOperationException("SMTP settings are not configured.");
 
         var password = string.IsNullOrWhiteSpace(smtp.Password)
             ? string.Empty

@@ -18,7 +18,7 @@ public class MailController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> Send([FromBody] SendMailCommand command, CancellationToken ct)
     {
         var r = await mediator.Send(command, ct);
-        return r.IsSuccess ? Ok(new { message = "Mail gönderildi." }) : BadRequest(new { error = r.Error });
+        return r.IsSuccess ? Ok(new { message = "Mail sent." }) : BadRequest(new { error = r.Error });
     }
 
     [HttpPost("send-bulk")]

@@ -43,7 +43,7 @@ public class ExportPageInstancesQueryHandler(IDbContextAccessor db, IExportServi
         var isExcel = request.Format.Equals("excel", StringComparison.OrdinalIgnoreCase);
         return isExcel
             ? new ExportResult(
-                exportService.ExportExcel(rows, "Sayfa İçerikleri"),
+                exportService.ExportExcel(rows, "Page Contents"),
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 $"pages-{DateTime.UtcNow:yyyyMMdd}.xlsx")
             : new ExportResult(

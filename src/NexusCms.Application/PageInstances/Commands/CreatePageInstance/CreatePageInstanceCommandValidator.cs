@@ -12,15 +12,15 @@ public class CreatePageInstanceCommandValidator : AbstractValidator<CreatePageIn
             .NotEmpty()
             .MaximumLength(500)
             .Matches("^[a-z0-9-/]+$")
-            .WithMessage("Slug yalnızca küçük harf, rakam, tire ve / içerebilir.");
+            .WithMessage("Slug may only contain lowercase letters, digits, hyphens and /.");
 
         RuleFor(x => x.ContentJson)
             .NotEmpty()
-            .Must(BeValidJson).WithMessage("ContentJson geçerli bir JSON nesnesi olmalıdır.");
+            .Must(BeValidJson).WithMessage("ContentJson must be a valid JSON object.");
 
         RuleFor(x => x.SeoMetaJson)
             .NotEmpty()
-            .Must(BeValidJson).WithMessage("SeoMetaJson geçerli bir JSON nesnesi olmalıdır.");
+            .Must(BeValidJson).WithMessage("SeoMetaJson must be a valid JSON object.");
     }
 
     private static bool BeValidJson(string json)

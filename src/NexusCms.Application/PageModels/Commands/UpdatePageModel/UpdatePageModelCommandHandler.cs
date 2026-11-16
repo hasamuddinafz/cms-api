@@ -12,7 +12,7 @@ public class UpdatePageModelCommandHandler(IDbContextAccessor db)
     {
         var model = await db.PageModels.FindAsync([request.Id], ct);
         if (model is null)
-            return Result.Failure("Sayfa modeli bulunamadı.");
+            return Result.Failure("Page model not found.");
 
         model.Name        = request.Name;
         model.Description = request.Description;

@@ -24,7 +24,7 @@ public class UploadFileCommandHandler(
         if (request.SizeBytes > limit)
         {
             await storage.DeleteAsync(stored.Url, stored.ThumbnailUrl, ct);
-            return Result.Failure<FileAssetDto>($"Dosya boyutu sınırı aşıldı ({limit / 1024 / 1024} MB).");
+            return Result.Failure<FileAssetDto>($"File size limit exceeded ({limit / 1024 / 1024} MB).");
         }
 
         var asset = new FileAsset

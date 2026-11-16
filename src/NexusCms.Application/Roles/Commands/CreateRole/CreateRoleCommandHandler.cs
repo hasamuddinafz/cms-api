@@ -13,7 +13,7 @@ public class CreateRoleCommandHandler(IDbContextAccessor db, IUnitOfWork uow)
     public async Task<Result<RoleDto>> Handle(CreateRoleCommand request, CancellationToken ct)
     {
         if (await db.Roles.AnyAsync(r => r.Name == request.Name, ct))
-            return Result<RoleDto>.Failure($"'{request.Name}' adında bir rol zaten mevcut.");
+            return Result<RoleDto>.Failure($"A role named '{request.Name}' already exists.");
 
         var role = new Role
         {

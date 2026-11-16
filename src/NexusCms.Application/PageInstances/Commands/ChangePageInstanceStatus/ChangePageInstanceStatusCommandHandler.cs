@@ -12,7 +12,7 @@ public class ChangePageInstanceStatusCommandHandler(IDbContextAccessor db, ICurr
     {
         var instance = await db.PageInstances.FindAsync([request.Id], ct);
         if (instance is null)
-            return Result.Failure("Sayfa içeriği bulunamadı.");
+            return Result.Failure("Page content not found.");
 
         var valid = (instance.Status, request.TargetStatus) switch
         {
@@ -23,7 +23,7 @@ public class ChangePageInstanceStatusCommandHandler(IDbContextAccessor db, ICurr
         };
 
         if (!valid)
-            return Result.Failure($"'{instance.Status}' durumundan '{request.TargetStatus}' durumuna geçiş yapılamaz.");
+            return Result.Failure($"Cannot change status from '{instance.Status}' to '{request.TargetStatus}'.");
 
         instance.Status           = request.TargetStatus;
         instance.UpdatedByUserId  = currentUser.UserId;

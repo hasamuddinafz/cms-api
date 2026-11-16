@@ -13,7 +13,7 @@ public class AssignRolesCommandHandler(IDbContextAccessor db, IUnitOfWork uow)
     public async Task<Result> Handle(AssignRolesCommand request, CancellationToken ct)
     {
         var user = await db.Users.FindAsync([request.UserId], ct);
-        if (user is null) return Result.Failure("Kullanıcı bulunamadı.");
+        if (user is null) return Result.Failure("User not found.");
 
         // Remove all current role assignments
         var existing = await db.UserRoles

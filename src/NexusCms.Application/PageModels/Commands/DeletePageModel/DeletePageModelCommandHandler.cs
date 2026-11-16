@@ -12,11 +12,11 @@ public class DeletePageModelCommandHandler(IDbContextAccessor db)
     {
         var model = await db.PageModels.FindAsync([request.Id], ct);
         if (model is null)
-            return Result.Failure("Sayfa modeli bulunamadı.");
+            return Result.Failure("Page model not found.");
 
         var hasInstances = await db.PageInstances.AnyAsync(i => i.PageModelId == request.Id, ct);
         if (hasInstances)
-            return Result.Failure("Bu modele bağlı sayfa içerikleri bulunuyor. Önce içerikleri silin.");
+            return Result.Failure("This model has content items attached. Delete them first.");
 
         db.PageModels.Remove(model);
         await db.SaveChangesAsync(ct);

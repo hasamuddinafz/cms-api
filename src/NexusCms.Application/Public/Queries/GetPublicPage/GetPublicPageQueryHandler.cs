@@ -28,6 +28,6 @@ public class GetPublicPageQueryHandler(IDbContextAccessor db)
 
         return page is not null
             ? Result<PublicPageDto>.Success(page)
-            : Result<PublicPageDto>.Failure("Sayfa bulunamadı veya yayınlanmamış.");
+            : Result<PublicPageDto>.Failure("Page not found or not published.");
     }
 }

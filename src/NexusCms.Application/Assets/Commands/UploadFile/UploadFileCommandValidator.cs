@@ -15,11 +15,11 @@ public class UploadFileCommandValidator : AbstractValidator<UploadFileCommand>
         RuleFor(x => x.MimeType)
             .NotEmpty()
             .Must(mime => opts.AllowedMimeTypes.Count == 0 || opts.AllowedMimeTypes.Contains(mime))
-            .WithMessage(x => $"'{x.MimeType}' MIME tipi desteklenmiyor.");
+            .WithMessage(x => $"MIME type '{x.MimeType}' is not supported.");
 
         RuleFor(x => x.SizeBytes)
             .GreaterThan(0)
-            .WithMessage("Dosya boş olamaz.");
+            .WithMessage("File cannot be empty.");
 
         RuleFor(x => x.Folder).MaximumLength(200).When(x => x.Folder is not null);
     }

@@ -13,7 +13,7 @@ public class CreatePageModelCommandHandler(IDbContextAccessor db)
     {
         var keyTaken = await db.PageModels.AnyAsync(m => m.Key == request.Key, ct);
         if (keyTaken)
-            return Result.Failure<Guid>($"'{request.Key}' key'i zaten kullanımda.");
+            return Result.Failure<Guid>($"Key '{request.Key}' is already in use.");
 
         var model = new PageModel
         {

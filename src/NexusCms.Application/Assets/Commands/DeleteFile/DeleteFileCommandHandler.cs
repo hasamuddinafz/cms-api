@@ -11,7 +11,7 @@ public class DeleteFileCommandHandler(IDbContextAccessor db, IFileStorageService
     {
         var asset = await db.FileAssets.FindAsync([request.Id], ct);
         if (asset is null)
-            return Result.Failure("Dosya bulunamadı.");
+            return Result.Failure("File not found.");
 
         await storage.DeleteAsync(asset.Url, asset.ThumbnailUrl, ct);
         db.FileAssets.Remove(asset);

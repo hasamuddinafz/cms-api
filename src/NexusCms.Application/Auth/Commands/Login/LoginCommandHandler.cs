@@ -18,11 +18,11 @@ public class LoginCommandHandler(
     {
         var user = await userManager.FindByEmailAsync(request.Email);
         if (user is null || !user.IsActive)
-            return Result.Failure<LoginResponse>("Geçersiz e-posta veya şifre.");
+            return Result.Failure<LoginResponse>("Invalid email or password.");
 
         var passwordValid = await userManager.CheckPasswordAsync(user, request.Password);
         if (!passwordValid)
-            return Result.Failure<LoginResponse>("Geçersiz e-posta veya şifre.");
+            return Result.Failure<LoginResponse>("Invalid email or password.");
 
         var permissions = await db.GetUserPermissionsAsync(user.Id, ct);
 

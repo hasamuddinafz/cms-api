@@ -15,7 +15,7 @@ public class GetMailTemplateByIdHandler(IDbContextAccessor db)
             .FirstOrDefaultAsync(t => t.Id == request.Id, ct);
 
         if (template is null)
-            return Result<MailTemplateDto>.Failure("Mail şablonu bulunamadı.");
+            return Result<MailTemplateDto>.Failure("Mail template not found.");
 
         return Result<MailTemplateDto>.Success(new MailTemplateDto(
             template.Id,

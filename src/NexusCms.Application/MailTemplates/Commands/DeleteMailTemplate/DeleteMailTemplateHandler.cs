@@ -12,7 +12,7 @@ public class DeleteMailTemplateHandler(IDbContextAccessor db)
     {
         var template = await db.MailTemplates.FirstOrDefaultAsync(x => x.Id == request.Id, ct);
         if (template is null)
-            return Result.Failure("Mail şablonu bulunamadı.");
+            return Result.Failure("Mail template not found.");
 
         db.MailTemplates.Remove(template);
         await db.SaveChangesAsync(ct);

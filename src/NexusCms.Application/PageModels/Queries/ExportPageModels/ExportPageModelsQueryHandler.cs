@@ -34,7 +34,7 @@ public class ExportPageModelsQueryHandler(IDbContextAccessor db, IExportService 
 
         return isExcel
             ? new ExportResult(
-                exportService.ExportExcel(rows, "Sayfa Modelleri"),
+                exportService.ExportExcel(rows, "Page Models"),
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 $"page-models-{DateTime.UtcNow:yyyyMMdd}.xlsx")
             : new ExportResult(

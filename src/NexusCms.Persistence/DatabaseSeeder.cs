@@ -14,6 +14,7 @@ namespace NexusCms.Persistence;
 public static class DatabaseSeeder
 {
     public const string SuperAdminRoleName = "SuperAdmin";
+    private const string SuperAdminDescription = "System role with all permissions.";
     private static readonly Guid SuperAdminRoleId = new("A0000000-0000-0000-0000-000000000001");
 
     public static async Task SeedAsync(
@@ -50,6 +51,22 @@ public static class DatabaseSeeder
             await db.SaveChangesAsync();
         }
 
+        // Keep labels/modules of existing permissions in sync with the code definitions
+        var definitions = Permissions.All().ToDictionary(p => p.Key);
+        var existing = await db.Permissions.ToListAsync();
+        var changed = false;
+        foreach (var perm in existing)
+        {
+            if (!definitions.TryGetValue(perm.Key, out var def)) continue;
+            if (perm.Label != def.Label || perm.Module != def.Module)
+            {
+                perm.Label  = def.Label;
+                perm.Module = def.Module;
+                changed = true;
+            }
+        }
+        if (changed) await db.SaveChangesAsync();
+
         // Grant any newly added permissions to SuperAdmin role
         var superAdminRole = await db.Roles.FindAsync(SuperAdminRoleId);
         if (superAdminRole is null) return;
@@ -75,14 +92,23 @@ public static class DatabaseSeeder
 
     private static async Task SeedSuperAdminRoleAsync(AppDbContext db, RoleManager<Role> roleManager)
     {
-        if (await roleManager.RoleExistsAsync(SuperAdminRoleName)) return;
+        var existingRole = await roleManager.FindByNameAsync(SuperAdminRoleName);
+        if (existingRole is not null)
+        {
+            if (existingRole.Description != SuperAdminDescription)
+            {
+                existingRole.Description = SuperAdminDescription;
+                await roleManager.UpdateAsync(existingRole);
+            }
+            return;
+        }
 
         var role = new Role
         {
             Id           = SuperAdminRoleId,
             Name         = SuperAdminRoleName,
             NormalizedName = SuperAdminRoleName.ToUpperInvariant(),
-            Description  = "Tüm yetkilere sahip sistem rolü.",
+            Description  = SuperAdminDescription,
             IsSystemRole = true
         };
 

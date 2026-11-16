@@ -1,10 +1,10 @@
 # NEXUS CMS — API
 
-.NET 9 backend for the NEXUS CMS headless content management system. Clean Architecture, CQRS, PostgreSQL.
+.NET 10 backend for the NEXUS CMS headless content management system. Clean Architecture, CQRS, PostgreSQL.
 
 ## Tech Stack
 
-- **.NET 9** — ASP.NET Core Web API
+- **.NET 10** — ASP.NET Core Web API
 - **Clean Architecture** — Domain · Application · Persistence · API
 - **CQRS** + **MediatR**
 - **Entity Framework Core** + **Npgsql** (PostgreSQL, JSONB)
@@ -17,7 +17,7 @@
 
 ### Prerequisites
 
-- .NET 9 SDK
+- .NET 10 SDK
 - PostgreSQL 15+
 
 ### Configuration
@@ -33,12 +33,14 @@ Edit `appsettings.json`:
 ```json
 {
   "ConnectionStrings": {
-    "Default": "Host=localhost;Database=nexuscms;Username=postgres;Password=your_password"
+    "DefaultConnection": "Host=localhost;Database=nexuscms;Username=postgres;Password=your_password"
   },
   "Jwt": {
-    "Secret": "at-least-32-character-random-secret-key",
-    "ExpiryMinutes": 15,
-    "RefreshExpiryDays": 7
+    "Key": "at-least-32-character-random-secret-key",
+    "Issuer": "NexusCms",
+    "Audience": "NexusCms",
+    "AccessTokenExpirationMinutes": 15,
+    "RefreshTokenExpirationDays": 7
   },
   "Encryption": {
     "Key": "32-character-aes-key-here!!"
@@ -60,9 +62,9 @@ dotnet restore && dotnet build
 # Apply migrations
 dotnet ef database update --project ../NexusCms.Persistence --startup-project .
 
-# Start
+# Start (migrations are also applied automatically on startup)
 dotnet run
-# http://localhost:5000
+# http://localhost:5281
 ```
 
 ### Migrations
@@ -90,7 +92,7 @@ docker compose up
 Set real values in `docker-compose.yml` before deploying:
 
 ```yaml
-Jwt__Secret: "your-strong-secret"
+Jwt__Key: "your-strong-secret-at-least-32-chars"
 Encryption__Key: "your-32-char-key"
 ```
 
@@ -175,9 +177,23 @@ Page content is stored as JSONB, keyed by language:
 
 ```json
 {
-  "tr": { "hero": { "title": "Başlık", "image": "/uploads/images/..." } },
-  "en": { "hero": { "title": "Heading", "image": "/uploads/images/..." } }
+  "en": { "hero": { "title": "Heading", "image": "/uploads/images/..." } },
+  "de": { "hero": { "title": "Überschrift", "image": "/uploads/images/..." } }
 }
 ```
 
 The public API returns the full `contentJson` — the frontend selects the desired language key.
+
+## Default Login
+
+After the first start the API seeds a SuperAdmin user: `admin@nexuscms.local` / `Admin1234!`. **Change this password immediately.**
+
+## Contributing
+
+NEXUS CMS is open source and contributions are welcome. Fork the repo, create a feature branch, make sure the build passes, and open a Pull Request describing what changed and why. Bug reports and feature ideas are welcome as issues.
+
+Related repository — Admin panel: [cms-panel](https://github.com/hasamuddinafz/cms-panel)
+
+## License
+
+[MIT](LICENSE) © Hasamuddin Afzali

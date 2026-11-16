@@ -11,8 +11,8 @@ public class DeleteRoleCommandHandler(IDbContextAccessor db, IUnitOfWork uow)
     public async Task<Result> Handle(DeleteRoleCommand request, CancellationToken ct)
     {
         var role = await db.Roles.FindAsync([request.Id], ct);
-        if (role is null) return Result.Failure("Rol bulunamadı.");
-        if (role.IsSystemRole) return Result.Failure("Sistem rolleri silinemez.");
+        if (role is null) return Result.Failure("Role not found.");
+        if (role.IsSystemRole) return Result.Failure("System roles cannot be deleted.");
 
         db.Roles.Remove(role);
         await uow.SaveChangesAsync(ct);

@@ -10,6 +10,6 @@ public class UpdateAltTextCommandValidator : AbstractValidator<UpdateAltTextComm
         RuleFor(x => x.AltTextJson)
             .NotEmpty()
             .Must(json => { try { System.Text.Json.JsonDocument.Parse(json); return true; } catch { return false; } })
-            .WithMessage("AltTextJson geçerli bir JSON nesnesi olmalıdır.");
+            .WithMessage("AltTextJson must be a valid JSON object.");
     }
 }

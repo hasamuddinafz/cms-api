@@ -15,7 +15,7 @@ public class SendMailCommandHandler(IEmailService emailService) : IRequestHandle
         }
         catch (Exception ex)
         {
-            return Result.Failure($"Mail gönderilemedi: {ex.Message}");
+            return Result.Failure($"Mail could not be sent: {ex.Message}");
         }
     }
 }

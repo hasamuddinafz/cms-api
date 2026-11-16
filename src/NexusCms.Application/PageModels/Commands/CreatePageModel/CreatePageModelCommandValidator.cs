@@ -9,7 +9,7 @@ public class CreatePageModelCommandValidator : AbstractValidator<CreatePageModel
         RuleFor(x => x.Key)
             .NotEmpty()
             .MaximumLength(100)
-            .Matches("^[a-z0-9-]+$").WithMessage("Key yalnızca küçük harf, rakam ve tire içerebilir.");
+            .Matches("^[a-z0-9-]+$").WithMessage("Key may only contain lowercase letters, digits and hyphens.");
 
         RuleFor(x => x.Name).NotEmpty().MaximumLength(200);
         RuleFor(x => x.Description).MaximumLength(500);
@@ -17,7 +17,7 @@ public class CreatePageModelCommandValidator : AbstractValidator<CreatePageModel
 
         RuleFor(x => x.SchemaJson)
             .NotEmpty()
-            .Must(BeValidJson).WithMessage("SchemaJson geçerli bir JSON nesnesi olmalıdır.");
+            .Must(BeValidJson).WithMessage("SchemaJson must be a valid JSON object.");
     }
 
     private static bool BeValidJson(string json)

@@ -11,7 +11,7 @@ public class PublicSettingsController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
     [OutputCache(PolicyName = "Public5min")]
-    public async Task<IActionResult> Get([FromQuery] string lang = "tr", CancellationToken ct = default)
+    public async Task<IActionResult> Get([FromQuery] string lang = "en", CancellationToken ct = default)
     {
         var result = await mediator.Send(new GetPublicSettingsQuery(lang), ct);
         return result.IsSuccess ? Ok(result.Value) : StatusCode(500, result.Error);

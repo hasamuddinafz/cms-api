@@ -18,7 +18,7 @@ public class FileAsset : Entity
     public FileType FileType { get; set; }
     public string Url { get; set; } = string.Empty;
     public string? ThumbnailUrl { get; set; }
-    public string AltTextJson { get; set; } = "{}";        // JSONB — { "tr": "...", "en": "..." }
+    public string AltTextJson { get; set; } = "{}";        // JSONB — { "en": "...", "de": "..." }
     public string? Folder { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

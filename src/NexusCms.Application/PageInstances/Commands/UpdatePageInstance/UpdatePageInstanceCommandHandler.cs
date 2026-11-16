@@ -12,7 +12,7 @@ public class UpdatePageInstanceCommandHandler(IDbContextAccessor db, ICurrentUse
     {
         var instance = await db.PageInstances.FindAsync([request.Id], ct);
         if (instance is null)
-            return Result.Failure("Sayfa içeriği bulunamadı.");
+            return Result.Failure("Page content not found.");
 
         // Slug uniqueness within same model (excluding self)
         var slugTaken = await db.PageInstances.AnyAsync(
@@ -20,7 +20,7 @@ public class UpdatePageInstanceCommandHandler(IDbContextAccessor db, ICurrentUse
               && i.Slug == request.Slug
               && i.Id != request.Id, ct);
         if (slugTaken)
-            return Result.Failure("Bu model için aynı slug zaten kullanımda.");
+            return Result.Failure("This slug is already in use for this model.");
 
         instance.Slug             = request.Slug;
         instance.ContentJson      = request.ContentJson;

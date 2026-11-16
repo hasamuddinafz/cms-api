@@ -17,13 +17,13 @@ public class UpdateRoleCommandHandler(IDbContextAccessor db, IUnitOfWork uow)
             .FirstOrDefaultAsync(r => r.Id == request.Id, ct);
 
         if (role is null)
-            return Result<RoleDto>.Failure("Rol bulunamadı.");
+            return Result<RoleDto>.Failure("Role not found.");
 
         if (role.IsSystemRole)
-            return Result<RoleDto>.Failure("Sistem rolleri düzenlenemez.");
+            return Result<RoleDto>.Failure("System roles cannot be edited.");
 
         if (await db.Roles.AnyAsync(r => r.Name == request.Name && r.Id != request.Id, ct))
-            return Result<RoleDto>.Failure($"'{request.Name}' adında başka bir rol zaten mevcut.");
+            return Result<RoleDto>.Failure($"Another role named '{request.Name}' already exists.");
 
         role.Name        = request.Name;
         role.Description = request.Description;

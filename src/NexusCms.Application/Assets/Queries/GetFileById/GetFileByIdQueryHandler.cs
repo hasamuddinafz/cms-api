@@ -16,6 +16,6 @@ public class GetFileByIdQueryHandler(IDbContextAccessor db)
                 a.Id, a.FileName, a.OriginalFileName, a.MimeType,
                 a.SizeBytes, a.FileType, a.Url, a.ThumbnailUrl,
                 a.AltTextJson, a.Folder, a.CreatedAt, a.CreatedByUserId))
-            : Result.Failure<FileAssetDto>("Dosya bulunamadı.");
+            : Result.Failure<FileAssetDto>("File not found.");
     }
 }

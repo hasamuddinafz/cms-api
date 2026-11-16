@@ -45,7 +45,7 @@ public class ContactController(IMediator mediator) : ControllerBase
         // Mark as read automatically on reply
         await mediator.Send(new MarkContactMessageReadCommand(id, true), ct);
         var r = await mediator.Send(new SendMailCommand(body.ToEmail, body.ToName, body.Subject, body.HtmlBody), ct);
-        return r.IsSuccess ? Ok(new { message = "Cevap gönderildi." }) : BadRequest(new { error = r.Error });
+        return r.IsSuccess ? Ok(new { message = "Reply sent." }) : BadRequest(new { error = r.Error });
     }
 
     [HttpDelete("{id:guid}")]

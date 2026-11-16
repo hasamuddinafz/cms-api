@@ -11,7 +11,7 @@ public class DeletePageInstanceCommandHandler(IDbContextAccessor db)
     {
         var instance = await db.PageInstances.FindAsync([request.Id], ct);
         if (instance is null)
-            return Result.Failure("Sayfa içeriği bulunamadı.");
+            return Result.Failure("Page content not found.");
 
         db.PageInstances.Remove(instance);
         await db.SaveChangesAsync(ct);

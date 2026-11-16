@@ -100,63 +100,63 @@ public static class Permissions
     public static IReadOnlyList<(Guid Id, string Key, string Module, string Label)> All() =>
     [
         // Pages
-        (new Guid("10000001-0000-0000-0000-000000000001"), Pages.View,    "Pages", "Sayfaları Görüntüle"),
-        (new Guid("10000001-0000-0000-0000-000000000002"), Pages.Create,  "Pages", "Sayfa Oluştur"),
-        (new Guid("10000001-0000-0000-0000-000000000003"), Pages.Edit,    "Pages", "Sayfa Düzenle"),
-        (new Guid("10000001-0000-0000-0000-000000000004"), Pages.Delete,  "Pages", "Sayfa Sil"),
-        (new Guid("10000001-0000-0000-0000-000000000005"), Pages.Publish, "Pages", "Sayfa Yayınla"),
+        (new Guid("10000001-0000-0000-0000-000000000001"), Pages.View,    "Pages", "View Pages"),
+        (new Guid("10000001-0000-0000-0000-000000000002"), Pages.Create,  "Pages", "Create Pages"),
+        (new Guid("10000001-0000-0000-0000-000000000003"), Pages.Edit,    "Pages", "Edit Pages"),
+        (new Guid("10000001-0000-0000-0000-000000000004"), Pages.Delete,  "Pages", "Delete Pages"),
+        (new Guid("10000001-0000-0000-0000-000000000005"), Pages.Publish, "Pages", "Publish Pages"),
 
         // PageModels
-        (new Guid("10000002-0000-0000-0000-000000000001"), PageModels.View,   "PageModels", "Sayfa Modellerini Görüntüle"),
-        (new Guid("10000002-0000-0000-0000-000000000002"), PageModels.Create, "PageModels", "Sayfa Modeli Oluştur"),
-        (new Guid("10000002-0000-0000-0000-000000000003"), PageModels.Edit,   "PageModels", "Sayfa Modeli Düzenle"),
-        (new Guid("10000002-0000-0000-0000-000000000004"), PageModels.Delete, "PageModels", "Sayfa Modeli Sil"),
+        (new Guid("10000002-0000-0000-0000-000000000001"), PageModels.View,   "PageModels", "View Page Models"),
+        (new Guid("10000002-0000-0000-0000-000000000002"), PageModels.Create, "PageModels", "Create Page Models"),
+        (new Guid("10000002-0000-0000-0000-000000000003"), PageModels.Edit,   "PageModels", "Edit Page Models"),
+        (new Guid("10000002-0000-0000-0000-000000000004"), PageModels.Delete, "PageModels", "Delete Page Models"),
 
         // Media
-        (new Guid("10000003-0000-0000-0000-000000000001"), Media.View,   "Media", "Medyayı Görüntüle"),
-        (new Guid("10000003-0000-0000-0000-000000000002"), Media.Upload, "Media", "Medya Yükle"),
-        (new Guid("10000003-0000-0000-0000-000000000003"), Media.Delete, "Media", "Medya Sil"),
+        (new Guid("10000003-0000-0000-0000-000000000001"), Media.View,   "Media", "View Media"),
+        (new Guid("10000003-0000-0000-0000-000000000002"), Media.Upload, "Media", "Upload Media"),
+        (new Guid("10000003-0000-0000-0000-000000000003"), Media.Delete, "Media", "Delete Media"),
 
         // Menus
-        (new Guid("10000004-0000-0000-0000-000000000001"), Menus.Manage, "Menus", "Menüleri Yönet"),
+        (new Guid("10000004-0000-0000-0000-000000000001"), Menus.Manage, "Menus", "Manage Menus"),
 
         // Settings
-        (new Guid("10000005-0000-0000-0000-000000000001"), Settings.GeneralEdit,     "Settings", "Genel Ayarları Düzenle"),
-        (new Guid("10000005-0000-0000-0000-000000000002"), Settings.SeoEdit,         "Settings", "SEO Ayarlarını Düzenle"),
-        (new Guid("10000005-0000-0000-0000-000000000003"), Settings.SmtpEdit,        "Settings", "SMTP Ayarlarını Düzenle"),
-        (new Guid("10000005-0000-0000-0000-000000000004"), Settings.LocalizationEdit, "Settings", "Yerelleştirme Ayarlarını Düzenle"),
-        (new Guid("10000005-0000-0000-0000-000000000005"), Settings.LanguagesManage, "Settings", "Dilleri Yönet"),
-        (new Guid("10000005-0000-0000-0000-000000000006"), Settings.ThemeEdit,       "Settings", "Tema Ayarlarını Düzenle"),
+        (new Guid("10000005-0000-0000-0000-000000000001"), Settings.GeneralEdit,     "Settings", "Edit General Settings"),
+        (new Guid("10000005-0000-0000-0000-000000000002"), Settings.SeoEdit,         "Settings", "Edit SEO Settings"),
+        (new Guid("10000005-0000-0000-0000-000000000003"), Settings.SmtpEdit,        "Settings", "Edit SMTP Settings"),
+        (new Guid("10000005-0000-0000-0000-000000000004"), Settings.LocalizationEdit, "Settings", "Edit Localization Settings"),
+        (new Guid("10000005-0000-0000-0000-000000000005"), Settings.LanguagesManage, "Settings", "Manage Languages"),
+        (new Guid("10000005-0000-0000-0000-000000000006"), Settings.ThemeEdit,       "Settings", "Edit Theme Settings"),
 
         // Users
-        (new Guid("10000006-0000-0000-0000-000000000001"), Users.Manage, "Users", "Kullanıcıları Yönet"),
+        (new Guid("10000006-0000-0000-0000-000000000001"), Users.Manage, "Users", "Manage Users"),
 
         // Roles
-        (new Guid("10000007-0000-0000-0000-000000000001"), Roles.Manage, "Roles", "Rolleri Yönet"),
+        (new Guid("10000007-0000-0000-0000-000000000001"), Roles.Manage, "Roles", "Manage Roles"),
 
         // Dashboard
-        (new Guid("10000008-0000-0000-0000-000000000001"), Dashboard.View, "Dashboard", "Dashboard Görüntüle"),
+        (new Guid("10000008-0000-0000-0000-000000000001"), Dashboard.View, "Dashboard", "View Dashboard"),
 
         // Activity
-        (new Guid("10000009-0000-0000-0000-000000000001"), Activity.View, "Activity", "Aktivite Geçmişini Görüntüle"),
+        (new Guid("10000009-0000-0000-0000-000000000001"), Activity.View, "Activity", "View Activity Log"),
 
         // Contact
-        (new Guid("10000010-0000-0000-0000-000000000001"), Contact.View,   "Contact", "İletişim Mesajlarını Görüntüle"),
-        (new Guid("10000010-0000-0000-0000-000000000002"), Contact.Delete, "Contact", "İletişim Mesajı Sil"),
-        (new Guid("10000010-0000-0000-0000-000000000003"), Contact.Reply,  "Contact", "İletişim Mesajına Cevap Ver"),
+        (new Guid("10000010-0000-0000-0000-000000000001"), Contact.View,   "Contact", "View Contact Messages"),
+        (new Guid("10000010-0000-0000-0000-000000000002"), Contact.Delete, "Contact", "Delete Contact Messages"),
+        (new Guid("10000010-0000-0000-0000-000000000003"), Contact.Reply,  "Contact", "Reply to Contact Messages"),
 
         // Subscribers
-        (new Guid("10000011-0000-0000-0000-000000000001"), Subscribers.View,   "Subscribers", "Aboneleri Görüntüle"),
-        (new Guid("10000011-0000-0000-0000-000000000002"), Subscribers.Delete, "Subscribers", "Abone Sil"),
-        (new Guid("10000011-0000-0000-0000-000000000003"), Subscribers.Export, "Subscribers", "Aboneleri Dışa Aktar"),
+        (new Guid("10000011-0000-0000-0000-000000000001"), Subscribers.View,   "Subscribers", "View Subscribers"),
+        (new Guid("10000011-0000-0000-0000-000000000002"), Subscribers.Delete, "Subscribers", "Delete Subscribers"),
+        (new Guid("10000011-0000-0000-0000-000000000003"), Subscribers.Export, "Subscribers", "Export Subscribers"),
 
         // Mail
-        (new Guid("10000012-0000-0000-0000-000000000001"), Mail.Send, "Mail", "Mail Gönder"),
+        (new Guid("10000012-0000-0000-0000-000000000001"), Mail.Send, "Mail", "Send Mail"),
 
         // MailTemplates
-        (new Guid("10000013-0000-0000-0000-000000000001"), MailTemplates.View,   "MailTemplates", "Mail Şablonlarını Görüntüle"),
-        (new Guid("10000013-0000-0000-0000-000000000002"), MailTemplates.Create, "MailTemplates", "Mail Şablonu Oluştur"),
-        (new Guid("10000013-0000-0000-0000-000000000003"), MailTemplates.Edit,   "MailTemplates", "Mail Şablonu Düzenle"),
-        (new Guid("10000013-0000-0000-0000-000000000004"), MailTemplates.Delete, "MailTemplates", "Mail Şablonu Sil"),
+        (new Guid("10000013-0000-0000-0000-000000000001"), MailTemplates.View,   "MailTemplates", "View Mail Templates"),
+        (new Guid("10000013-0000-0000-0000-000000000002"), MailTemplates.Create, "MailTemplates", "Create Mail Templates"),
+        (new Guid("10000013-0000-0000-0000-000000000003"), MailTemplates.Edit,   "MailTemplates", "Edit Mail Templates"),
+        (new Guid("10000013-0000-0000-0000-000000000004"), MailTemplates.Delete, "MailTemplates", "Delete Mail Templates"),
     ];
 }

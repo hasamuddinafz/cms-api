@@ -16,6 +16,6 @@ public class UpdatePageModelCommandValidator : AbstractValidator<UpdatePageModel
             {
                 try { System.Text.Json.JsonDocument.Parse(json); return true; }
                 catch { return false; }
-            }).WithMessage("SchemaJson geçerli bir JSON nesnesi olmalıdır.");
+            }).WithMessage("SchemaJson must be a valid JSON object.");
     }
 }

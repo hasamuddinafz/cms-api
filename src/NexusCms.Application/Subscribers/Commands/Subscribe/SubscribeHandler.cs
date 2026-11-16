@@ -14,7 +14,7 @@ public class SubscribeHandler(IDbContextAccessor db) : IRequestHandler<Subscribe
         var existing = await db.Subscribers.FirstOrDefaultAsync(x => x.Email == request.Email, ct);
         if (existing is not null)
         {
-            if (existing.IsActive) return Result.Failure<Guid>("Bu e-posta zaten abone.");
+            if (existing.IsActive) return Result.Failure<Guid>("This email is already subscribed.");
             existing.IsActive = true;
             existing.UnsubscribedAt = null;
             await db.SaveChangesAsync(ct);

@@ -31,6 +31,6 @@ public class GetPageInstanceByIdQueryHandler(IDbContextAccessor db)
 
         return dto is not null
             ? Result.Success(dto)
-            : Result.Failure<PageInstanceDto>("Sayfa içeriği bulunamadı.");
+            : Result.Failure<PageInstanceDto>("Page content not found.");
     }
 }

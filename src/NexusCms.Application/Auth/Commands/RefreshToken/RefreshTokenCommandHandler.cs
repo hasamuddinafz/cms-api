@@ -19,13 +19,13 @@ public class RefreshTokenCommandHandler(
             .FirstOrDefaultAsync(r => r.Token == request.Token, ct);
 
         if (stored is null || !stored.IsActive)
-            return Result.Failure<LoginResponse>("Geçersiz veya süresi dolmuş yenileme tokeni.");
+            return Result.Failure<LoginResponse>("Invalid or expired refresh token.");
 
         if (stored.ExpiresAt <= DateTime.UtcNow)
-            return Result.Failure<LoginResponse>("Oturum süresi dolmuş. Lütfen tekrar giriş yapın.");
+            return Result.Failure<LoginResponse>("Session expired. Please sign in again.");
 
         if (!stored.User.IsActive)
-            return Result.Failure<LoginResponse>("Kullanıcı hesabı devre dışı.");
+            return Result.Failure<LoginResponse>("User account is disabled.");
 
         // Rotate: revoke old, issue new
         stored.IsRevoked  = true;

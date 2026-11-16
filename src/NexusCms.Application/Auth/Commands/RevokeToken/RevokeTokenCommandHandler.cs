@@ -14,7 +14,7 @@ public class RevokeTokenCommandHandler(IDbContextAccessor db)
             .FirstOrDefaultAsync(r => r.Token == request.Token, ct);
 
         if (token is null || !token.IsActive)
-            return Result.Failure("Token bulunamadı veya zaten geçersiz.");
+            return Result.Failure("Token not found or already revoked.");
 
         token.IsRevoked = true;
         token.RevokedAt = DateTime.UtcNow;

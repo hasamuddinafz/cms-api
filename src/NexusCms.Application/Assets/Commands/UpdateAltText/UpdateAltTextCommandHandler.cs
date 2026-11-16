@@ -12,10 +12,10 @@ public class UpdateAltTextCommandHandler(IDbContextAccessor db)
     {
         var asset = await db.FileAssets.FindAsync([request.Id], ct);
         if (asset is null)
-            return Result.Failure("Dosya bulunamadı.");
+            return Result.Failure("File not found.");
 
         if (asset.FileType != FileType.Image)
-            return Result.Failure("Alt metin yalnızca görsel (Image) tipindeki dosyalar için güncellenebilir.");
+            return Result.Failure("Alt text can only be updated for Image files.");
 
         asset.AltTextJson = request.AltTextJson;
         await db.SaveChangesAsync(ct);

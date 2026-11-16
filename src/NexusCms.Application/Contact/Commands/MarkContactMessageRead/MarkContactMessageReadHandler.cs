@@ -11,7 +11,7 @@ public class MarkContactMessageReadHandler(IDbContextAccessor db) : IRequestHand
     public async Task<Result> Handle(MarkContactMessageReadCommand request, CancellationToken ct)
     {
         var msg = await db.ContactMessages.FindAsync([request.Id], ct);
-        if (msg is null) return Result.Failure("Mesaj bulunamadı.");
+        if (msg is null) return Result.Failure("Message not found.");
         msg.IsRead = request.IsRead;
         await db.SaveChangesAsync(ct);
         return Result.Success();

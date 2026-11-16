@@ -18,6 +18,6 @@ public class GetPublicMenuQueryHandler(IDbContextAccessor db)
 
         return menu is not null
             ? Result<PublicMenuDto>.Success(menu)
-            : Result<PublicMenuDto>.Failure($"Menü bulunamadı: {request.Key}");
+            : Result<PublicMenuDto>.Failure($"Menu not found: {request.Key}");
     }
 }

@@ -10,7 +10,7 @@ public class DeleteSubscriberHandler(IDbContextAccessor db) : IRequestHandler<De
     public async Task<Result> Handle(DeleteSubscriberCommand request, CancellationToken ct)
     {
         var sub = await db.Subscribers.FindAsync([request.Id], ct);
-        if (sub is null) return Result.Failure("Abone bulunamadı.");
+        if (sub is null) return Result.Failure("Subscriber not found.");
         db.Subscribers.Remove(sub);
         await db.SaveChangesAsync(ct);
         return Result.Success();

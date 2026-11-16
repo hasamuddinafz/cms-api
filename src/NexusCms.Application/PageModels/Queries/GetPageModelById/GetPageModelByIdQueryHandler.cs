@@ -21,6 +21,6 @@ public class GetPageModelByIdQueryHandler(IDbContextAccessor db)
 
         return dto is not null
             ? Result.Success(dto)
-            : Result.Failure<PageModelDto>("Sayfa modeli bulunamadı.");
+            : Result.Failure<PageModelDto>("Page model not found.");
     }
 }

@@ -12,7 +12,7 @@ public class UpdateMailTemplateHandler(IDbContextAccessor db)
     {
         var template = await db.MailTemplates.FirstOrDefaultAsync(x => x.Id == request.Id, ct);
         if (template is null)
-            return Result.Failure("Mail şablonu bulunamadı.");
+            return Result.Failure("Mail template not found.");
 
         template.Name     = request.Name;
         template.Subject  = request.Subject;
