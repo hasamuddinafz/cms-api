@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NexusCms.Api;
@@ -26,7 +27,9 @@ try
         .AddPersistence(builder.Configuration)
         .AddApi(builder.Configuration);
 
-    builder.Services.AddControllers();
+    // Serialize enums (PageStatus, FileType, …) as their names — the panel compares against strings
+    builder.Services.AddControllers()
+        .AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
     // Ensure wwwroot exists so FileStorageService can write to it
     var wwwroot = Path.Combine(builder.Environment.ContentRootPath, "wwwroot");
